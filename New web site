@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tushar Yadav | Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+        :root {
+            --bg-color: #09050e;
+            --surface-color: rgba(255, 255, 255, 0.03);
+            --primary-glow: #8a2be2;
+            --secondary-glow: #4b0082;
+            --text-main: #ffffff;
+            --text-muted: #a0a0b0;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* Ambient Purple Glow Backgrounds */
+        .glow-blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--secondary-glow) 0%, rgba(9,5,14,0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: pulseGlow 8s infinite alternate ease-in-out;
+        }
+
+        .glow-1 { top: -100px; left: -200px; }
+        .glow-2 { top: 40%; right: -200px; background: radial-gradient(circle, var(--primary-glow) 0%, rgba(9,5,14,0) 70%); }
+        .glow-3 { bottom: -100px; left: 20%; }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+            gap: 3rem;
+            position: sticky;
+            top: 0;
+            background: rgba(9, 5, 14, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--text-main);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 90vh;
+            gap: 4rem;
+        }
+
+        .hero-left {
+            flex: 1;
+            animation: slideInLeft 1s ease-out forwards;
+        }
+
+        .greeting {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .greeting span {
+            color: #b026ff;
+            font-weight: 600;
+        }
+
+        .styled-quote {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+
+        .styled-quote strong {
+            color: var(--text-main);
+            font-size: 2.5rem;
+            display: block;
+        }
+
+        .styled-quote .highlight {
+            border: 1px solid var(--text-muted);
+            border-radius: 50px;
+            padding: 0 15px;
+            display: inline-block;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 4px;
+            height: 4rem;
+            background-color: var(--text-main);
+            margin-left: 10px;
+            animation: blink 1s infinite;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        /* Avatar/Right Side */
+        .hero-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            animation: slideInRight 1s ease-out forwards;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .avatar-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(138,43,226,0.4) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .avatar-img {
+            width: 100%;
+            border-radius: 20px;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.3));
+        }
+
+        /* Tools & Skills Grid */
+        .section-title {
+            font-size: 2.2rem;
+            margin: 6rem 0 3rem;
+            font-weight: 700;
+            border-left: 4px solid var(--primary-glow);
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .tools-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .tool-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            flex: 1;
+            min-width: 250px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .reveal.active .tool-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tool-card:nth-child(1) { transition-delay: 0.1s; }
+        .tool-card:nth-child(2) { transition-delay: 0.2s; }
+        .tool-card:nth-child(3) { transition-delay: 0.3s; }
+        .tool-card:nth-child(4) { transition-delay: 0.4s; }
+        .tool-card:nth-child(5) { transition-delay: 0.5s; }
+        .tool-card:nth-child(6) { transition-delay: 0.6s; }
+
+        .tool-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(138, 43, 226, 0.6);
+            box-shadow: 0 15px 35px rgba(138, 43, 226, 0.2);
+        }
+
+        .tool-card img {
+            width: 45px;
+            height: 45px;
+            filter: drop-shadow(0 0 10px var(--primary-glow));
+        }
+
+        .tool-card span {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        /* Achievements Cards */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .achievement-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            border-color: rgba(138, 43, 226, 0.3);
+        }
+
+        .achievement-card:hover::before {
+            opacity: 1;
+        }
+
+        .achievement-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .achievement-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 28px;
+            background: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text-main);
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* --- INTERACTIVE TERMINAL CONTACT --- */
+        .interactive-section {
+            margin-top: 6rem;
+            padding-top: 4rem;
+            border-top: 1px dashed var(--border-color);
+            position: relative;
+        }
+
+        .prompt-line {
+            display: flex;
+            align-items: center;
+            color: var(--primary-glow);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .prompt-line::before {
+            content: "guest@tusharyadav:~$ ";
+            color: var(--text-muted);
+            margin-right: 15px;
+            font-weight: 600;
+        }
+
+        #cmd-input {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            outline: none;
+            flex: 1;
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.3s ease;
+        }
+
+        #cmd-input:focus {
+            border-bottom: 2px solid var(--primary-glow);
+        }
+
+        #terminal-output {
+            margin-top: 2rem;
+            color: var(--text-muted);
+            white-space: pre-wrap;
+            font-family: 'Fira Code', monospace;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .sys-msg { color: var(--text-muted); font-size: 0.9rem; font-family: 'Fira Code', monospace;}
+        .error-msg { color: #ff3333; font-weight: bold;}
+        .success-msg { color: var(--primary-glow); font-weight: bold;}
+        .info-msg { color: #00d2ff; }
+
+        /* --- ANIMATIONS --- */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .reveal {
+            transition: opacity 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="glow-blob glow-1"></div>
+    <div class="glow-blob glow-2"></div>
+    <div class="glow-blob glow-3"></div>
+
+    <nav>
+        <a href="#home" class="active">Home</a>
+        <a href="#about">Stack</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#contact">Contact Shell</a>
+    </nav>
+
+    <div class="container" id="home">
+        <section class="hero">
+            <div class="hero-left">
+                <div class="greeting">
+                    Hello! I Am <span>Tushar Yadav</span>
+                </div>
+                
+                <div class="styled-quote">
+                    A developer who
+                    <strong>Judges code</strong>
+                    by its <span class="highlight">logic...</span>
+                </div>
+
+                <h1 class="main-title">Aspiring Game Dev<span class="cursor"></span></h1>
+                
+                <p class="hero-desc">
+                    Multi-disciplinary student combining rigorous engineering mechanics with interactive design. Operating out of terminal environments on custom Linux systems.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="https://in.linkedin.com/in/tushar-yadav-54273b327" target="_blank" class="btn">LinkedIn</a>
+                    <a href="https://github.com/Hakkaalpha" target="_blank" class="btn" style="border-color: #8a2be2;">GitHub Shell</a>
+                    <a href="mailto:nirmaly022@gmail.com" class="btn" style="border-color: #4b0082;">Email Me</a>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="avatar-container">
+                    <img src="https://avatars.githubusercontent.com/u/241429186?v=4" alt="Tushar" class="avatar-img">
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="reveal">
+            <h2 class="section-title">Current Stack & Environments</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <img src="https://cdn.simpleicons.org/archlinux" alt="Arch Linux">
+                    <span>Arch Linux</span>
+                </div>
+                <div class="tool-card">
+                    <img src="https://cdn.simpleicons.org/linuxmint" alt="Linux Mint">
+                    <span>Mint OS</span>
+                </div>
+                <div class="tool-card">
+                    <img src="https://cdn.simpleicons.org/kalilinux" alt="Kali Linux">
+                    <span>Kali Linux</span>
+                </div>
+                <div class="tool-card">
+                    <img src="https://cdn.simpleicons.org/blender" alt="Blender">
+                    <span>Blender 3D</span>
+                </div>
+                <div class="tool-card">
+                    <img src="https://cdn.simpleicons.org/cplusplus" alt="C++">
+                    <span>C++</span>
+                </div>
+                <div class="tool-card">
+                    <img src="https://cdn.simpleicons.org/python" alt="Python">
+                    <span>Python (Manim)</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements" class="reveal">
+            <h2 class="section-title">Milestones & Projects</h2>
+            <div class="grid-2">
+                
+                <div class="achievement-card">
+                    <h3>🏆 Unified Cyber Olympiad (UCO)</h3>
+                    <p>Secured All India Rank (AIR) 532, demonstrating high-level aptitude in mental ability, logical reasoning, and computer systems.</p>
+                </div>
+
+                <div class="achievement-card">
+                    <h3>🎬 sciencememeandlearn</h3>
+                    <p>Educational YouTube content blending complex physics/math with anime culture, leveraging Python (Manim) for programmatic animations.</p>
+                    <a href="#" class="btn">Watch Videos</a>
+                </div>
+
+                <div class="achievement-card">
+                    <h3>⛓️ Private Blockchain Sim</h3>
+                    <p>Experimenting with Python and C++ to build and simulate private blockchain structures, exploring decentralized network technology.</p>
+                    <a href="https://github.com/Hakkaalpha/Learning-new-thinks-" target="_blank" class="btn">View Logic Shell →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contact" class="reveal interactive-section">
+            <h2 class="section-title">Contact Shell</h2>
+            <p class="sys-msg">Interactive contact shell enabled. Type 'help' to see available commands.</p>
+            
+            <div id="terminal-output"></div>
+            
+            <div class="prompt-line">
+                <input type="text" id="cmd-input" autocomplete="off" spellcheck="false" placeholder="Type a command...">
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // --- 1. Scroll Reveal Logic ---
+        function revealOnScroll() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150; 
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                } else {
+                    reveals[i].classList.remove("active"); 
+                }
+            }
+        }
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
+
+
+        // --- 2. Interactive Terminal Contact Logic ---
+        const inputField = document.getElementById('cmd-input');
+        const outputArea = document.getElementById('terminal-output');
+
+        const helpText = "Available commands:\n" +
+                          "  contact\n" +
+                          "  email\n" +
+                          "  linkedin\n" +
+                          "  github\n" +
+                          "  clear\n" +
+                          "  about\n" +
+                          "  sudo rm -rf /";
+
+        inputField.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const cmd = inputField.value.trim().toLowerCase();
+                let response = '';
+
+                if (cmd === 'help') {
+                    response = helpText;
+                } else if (cmd === 'contact') {
+                    response = "Email: <a href='mailto:nirmaly022@gmail.com' class='info-msg'>nirmaly022@gmail.com</a>\n" +
+                               "LinkedIn: <a href='https://in.linkedin.com/in/tushar-yadav-54273b327' target='_blank' class='info-msg'>in.linkedin.com/in/tushar-yadav-54273b327</a>\n" +
+                               "GitHub: <a href='https://github.com/Hakkaalpha' target='_blank' class='info-msg'>github.com/Hakkaalpha</a>\n";
+                } else if (cmd === 'email') {
+                    response = "<a href='mailto:nirmaly022@gmail.com' class='success-msg'>[LINK] Opening mail client to reach nirmaly022@gmail.com...</a>";
+                } else if (cmd === 'linkedin') {
+                    response = "<a href='https://in.linkedin.com/in/tushar-yadav-54273b327' target='_blank' class='success-msg'>[LINK] Executing LinkedIn connection...</a>";
+                } else if (cmd === 'github') {
+                    response = "<a href='https://github.com/Hakkaalpha' target='_blank' class='success-msg'>[LINK] Executing GitHub shell...</a>";
+                } else if (cmd === 'clear') {
+                    outputArea.innerHTML = '';
+                    inputField.value = '';
+                    return; 
+                } else if (cmd === 'about') {
+                    response = "Tushar Yadav: Aspiring Game Dev. operating on custom Linux kernels.";
+                } else if (cmd === 'sudo rm -rf /') {
+                    response = "<span class='error-msg'>[CRITICAL ERROR] Access Denied. Sudo permissions required. Don't break the web.</span>";
+                } else if (cmd !== '') {
+                    response = "<span class='error-msg'>[ERROR] Command '" + cmd + "' not found. Type 'help' for a command list.</span>";
+                }
+
+                if (cmd !== '') {
+                    outputArea.innerHTML += "<div><span style='color: var(--text-muted); font-weight: bold;'>guest@tusharyadav:~$</span> " + cmd + "</div>";
+                    outputArea.innerHTML += "<div style='margin-bottom: 15px;'>" + response + "</div>";
+                }
+                
+                inputField.value = '';
+            }
+        });
+    </script>
+
+</body>
+</html>
