@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tushar Yadav | Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+        :root {
+            --bg-color: #09050e;
+            --surface-color: rgba(255, 255, 255, 0.03);
+            --primary-glow: #8a2be2;
+            --secondary-glow: #4b0082;
+            --text-main: #ffffff;
+            --text-muted: #a0a0b0;
+            --border-color: rgba(255, 255, 255, 0.08);
+            
+            /* Terminal Colors */
+            --term-bg: rgba(10, 10, 15, 0.85);
+            --term-text: #e0e0e0;
+            --term-green: #00ff41;
+            --term-blue: #00d2ff;
+            --term-purple: #b026ff;
+            --term-red: #ff3333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* Ambient Purple Glow Backgrounds */
+        .glow-blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--secondary-glow) 0%, rgba(9,5,14,0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: pulseGlow 8s infinite alternate ease-in-out;
+        }
+
+        .glow-1 { top: -100px; left: -200px; }
+        .glow-2 { top: 40%; right: -200px; background: radial-gradient(circle, var(--primary-glow) 0%, rgba(9,5,14,0) 70%); }
+        .glow-3 { bottom: -100px; left: 20%; }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+            gap: 3rem;
+            position: sticky;
+            top: 0;
+            background: rgba(9, 5, 14, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--text-main);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 90vh;
+            gap: 4rem;
+        }
+
+        .hero-left { flex: 1; }
+
+        .greeting {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .greeting span { color: #b026ff; font-weight: 600; }
+
+        .styled-quote {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+        .styled-quote strong {
+            color: var(--text-main);
+            font-size: 2.5rem;
+            display: block;
+        }
+        .styled-quote .highlight {
+            border: 1px solid var(--text-muted);
+            border-radius: 50px;
+            padding: 0 15px;
+            display: inline-block;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+        }
+        .cursor {
+            display: inline-block;
+            width: 4px;
+            height: 4rem;
+            background-color: var(--text-main);
+            margin-left: 10px;
+            animation: blink 1s infinite;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-buttons { display: flex; flex-wrap: wrap; gap: 15px; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 28px;
+            background: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text-main);
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* Avatar */
+        .hero-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        .avatar-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+        .avatar-container::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(138,43,226,0.4) 0%, transparent 70%);
+            z-index: -1;
+        }
+        .avatar-img {
+            width: 100%;
+            border-radius: 20px;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.3));
+        }
+
+        /* --- REAL LINUX TERMINAL UI --- */
+        .section-title {
+            font-size: 2.2rem;
+            margin: 4rem 0 2rem;
+            font-weight: 700;
+            border-left: 4px solid var(--primary-glow);
+            padding-left: 15px;
+        }
+
+        .terminal-window {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            background: var(--term-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(138, 43, 226, 0.15);
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+        }
+
+        .terminal-header {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .terminal-btn {
+            width: 12px; height: 12px; border-radius: 50%;
+        }
+        .btn-close { background: #ff5f56; }
+        .btn-min { background: #ffbd2e; }
+        .btn-max { background: #27c93f; }
+
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-family: 'Fira Code', monospace;
+            margin-right: 44px; /* offset buttons for centering */
+        }
+
+        .terminal-body {
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            color: var(--term-text);
+        }
+
+        /* Custom Scrollbar for Terminal */
+        .terminal-body::-webkit-scrollbar { width: 8px; }
+        .terminal-body::-webkit-scrollbar-track { background: transparent; }
+        .terminal-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+        .term-output { white-space: pre-wrap; margin-bottom: 10px; }
+        
+        .term-prompt { display: flex; align-items: center; }
+        
+        .prompt-text {
+            color: var(--term-green);
+            font-weight: 500;
+            margin-right: 8px;
+            white-space: nowrap;
+        }
+        
+        .prompt-path { color: var(--term-blue); margin-right: 8px; }
+        .prompt-symbol { color: var(--term-text); margin-right: 8px; }
+
+        .term-input {
+            background: transparent;
+            border: none;
+            color: var(--term-text);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            outline: none;
+            flex: 1;
+        }
+
+        /* Terminal Output Colors */
+        .ls-dir { color: var(--term-blue); font-weight: bold; }
+        .ls-file { color: var(--term-text); }
+        .ls-exec { color: var(--term-green); font-weight: bold; }
+        .err-text { color: var(--term-red); }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    </style>
+</head>
+<body>
+
+    <div class="glow-blob glow-1"></div>
+    <div class="glow-blob glow-2"></div>
+    <div class="glow-blob glow-3"></div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#terminal">Linux Shell</a>
+    </nav>
+
+    <div class="container" id="home">
+        <section class="hero">
+            <div class="hero-left">
+                <div class="greeting">
+                    Hello! I Am <span>Tushar Yadav</span>
+                </div>
+                <div class="styled-quote">
+                    A developer who
+                    <strong>Judges code</strong>
+                    by its <span class="highlight">logic...</span>
+                </div>
+                <h1 class="main-title">Aspiring Game Dev<span class="cursor"></span></h1>
+                <p class="hero-desc">
+                    Multi-disciplinary student combining rigorous engineering mechanics with interactive design. Operating out of terminal environments on custom Linux systems.
+                </p>
+                <div class="hero-buttons">
+                    <a href="https://in.linkedin.com/in/tushar-yadav-54273b327" target="_blank" class="btn">LinkedIn</a>
+                    <a href="mailto:nirmaly022@gmail.com" class="btn" style="border-color: #8a2be2;">Email Me</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="avatar-container">
+                    <img src="https://avatars.githubusercontent.com/u/241429186?v=4" alt="Tushar" class="avatar-img">
+                </div>
+            </div>
+        </section>
+
+        <section id="terminal">
+            <h2 class="section-title">Interactive OS</h2>
+            
+            <div class="terminal-window" onclick="document.getElementById('cli-input').focus()">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <div class="terminal-btn btn-close"></div>
+                        <div class="terminal-btn btn-min"></div>
+                        <div class="terminal-btn btn-max"></div>
+                    </div>
+                    <div class="terminal-title">guest@tusharyadav:~</div>
+                </div>
+                
+                <div class="terminal-body" id="term-body">
+                    <div class="term-output" style="color: var(--term-purple);">
+Welcome to Arch Linux (x86_64).
+Type 'help' for a list of available commands.
+Explore my portfolio using standard Linux commands (ls, cd, cat, pwd).
+                    </div>
+                    
+                    <div id="output-history"></div>
+
+                    <div class="term-prompt">
+                        <span class="prompt-text">guest@tusharyadav</span>
+                        <span class="prompt-symbol">:</span>
+                        <span class="prompt-path" id="current-path-display">~</span>
+                        <span class="prompt-symbol">$</span>
+                        <input type="text" class="term-input" id="cli-input" autocomplete="off" spellcheck="false" autofocus>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const cliInput = document.getElementById('cli-input');
+        const outputHistory = document.getElementById('output-history');
+        const pathDisplay = document.getElementById('current-path-display');
+        const termBody = document.getElementById('term-body');
+
+        // State
+        let currentPath = "~";
+        const user = "guest";
+        const hostname = "tusharyadav";
+
+        // Virtual File System (VFS) structure
+        const vfs = {
+            "~": {
+                type: "dir",
+                contents: {
+                    "about.txt": { type: "file", content: "Tushar Yadav: Aspiring Game Developer. Currently learning C++, Linux, and Manim for Python." },
+                    "contact.txt": { type: "file", content: "Email: nirmaly022@gmail.com\nLinkedIn: https://in.linkedin.com/in/tushar-yadav-54273b327\nGitHub: https://github.com/Hakkaalpha" },
+                    "achievements.txt": { type: "file", content: "- Secured All India Rank (AIR) 532 in Unified Cyber Olympiad (UCO)." },
+                    "projects": { 
+                        type: "dir", 
+                        contents: {
+                            "sciencememe.md": { type: "file", content: "# sciencememeandlearn\nEducational YouTube channel blending physics/math concepts with anime memes using programmatic Manim animations." },
+                            "blockchain.cpp": { type: "file", content: "// Private blockchain simulation built with C++ and Python.\nint main() {\n  std::cout << \"Initializing Genesis Block...\" << std::endl;\n  return 0;\n}" }
+                        }
+                    },
+                    "skills": {
+                        type: "dir",
+                        contents: {
+                            "linux.sh": { type: "file", content: "echo 'Proficient in Arch, Mint, and Kali Linux.'" },
+                            "blender.txt": { type: "file", content: "Knowledgeable in 3D modeling and rendering using Blender." }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Helper: Get node at current path
+        function getDirNode(path) {
+            if (path === "~") return vfs["~"];
+            const parts = path.replace("~/", "").split("/");
+            let current = vfs["~"];
+            for (let part of parts) {
+                if (part === "") continue;
+                if (current.contents && current.contents[part] && current.contents[part].type === "dir") {
+                    current = current.contents[part];
+                } else {
+                    return null;
+                }
+            }
+            return current;
+        }
+
+        // Handle Enter Keypress
+        cliInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const rawCmd = this.value.trim();
+                const args = rawCmd.split(' ').filter(Boolean);
+                const cmd = args[0] ? args[0].toLowerCase() : '';
+                
+                // Echo the command
+                echoPrompt(rawCmd);
+                
+                // Process Command
+                if (cmd !== '') {
+                    executeCommand(cmd, args.slice(1));
+                }
+                
+                this.value = '';
+                termBody.scrollTop = termBody.scrollHeight;
+            }
+        });
+
+        function echoPrompt(cmdText) {
+            const div = document.createElement('div');
+            div.innerHTML = `<span class="prompt-text">${user}@${hostname}</span><span class="prompt-symbol">:</span><span class="prompt-path">${currentPath}</span><span class="prompt-symbol">$</span> <span style="color: var(--term-text);">${cmdText}</span>`;
+            outputHistory.appendChild(div);
+        }
+
+        function printLine(text, cssClass = 'term-output') {
+            const div = document.createElement('div');
+            div.className = cssClass;
+            div.textContent = text;
+            outputHistory.appendChild(div);
+        }
+
+        function printHTML(htmlString) {
+            const div = document.createElement('div');
+            div.className = 'term-output';
+            div.innerHTML = htmlString;
+            outputHistory.appendChild(div);
+        }
+
+        // --- COMMAND HANDLERS ---
+        function executeCommand(cmd, args) {
+            const node = getDirNode(currentPath);
+
+            switch(cmd) {
+                case 'help':
+                    printLine("Available commands: help, ls, cd, pwd, cat, clear, whoami, date, uname, echo");
+                    break;
+                case 'clear':
+                    outputHistory.innerHTML = '';
+                    break;
+                case 'pwd':
+                    printLine(currentPath === "~" ? "/home/guest" : "/home/guest" + currentPath.replace("~", ""));
+                    break;
+                case 'whoami':
+                    printLine(user);
+                    break;
+                case 'date':
+                    printLine(new Date().toString());
+                    break;
+                case 'uname':
+                    if (args[0] === '-a') {
+                        printLine("Linux tusharyadav-portfolio 6.8.0-arch1-1 #1 SMP PREEMPT_DYNAMIC x86_64 GNU/Linux");
+                    } else {
+                        printLine("Linux");
+                    }
+                    break;
+                case 'echo':
+                    printLine(args.join(' '));
+                    break;
+                case 'ls':
+                    if (!node || !node.contents) return;
+                    let lsOutput = "";
+                    for (let key in node.contents) {
+                        const fileNode = node.contents[key];
+                        if (fileNode.type === "dir") {
+                            lsOutput += `<span class="ls-dir">${key}/</span>  `;
+                        } else if (key.endsWith(".sh") || key.endsWith(".cpp")) {
+                            lsOutput += `<span class="ls-exec">${key}</span>  `;
+                        } else {
+                            lsOutput += `<span class="ls-file">${key}</span>  `;
+                        }
+                    }
+                    printHTML(lsOutput);
+                    break;
+                case 'cd':
+                    if (args.length === 0 || args[0] === "~") {
+                        currentPath = "~";
+                    } else if (args[0] === "..") {
+                        if (currentPath !== "~") {
+                            const parts = currentPath.split("/");
+                            parts.pop();
+                            currentPath = parts.join("/") || "~";
+                        }
+                    } else {
+                        const target = args[0].replace(/\/$/, ""); // Remove trailing slash
+                        if (node.contents && node.contents[target]) {
+                            if (node.contents[target].type === "dir") {
+                                currentPath = currentPath === "~" ? `~/${target}` : `${currentPath}/${target}`;
+                            } else {
+                                printLine(`bash: cd: ${target}: Not a directory`, 'err-text');
+                            }
+                        } else {
+                            printLine(`bash: cd: ${target}: No such file or directory`, 'err-text');
+                        }
+                    }
+                    pathDisplay.textContent = currentPath;
+                    // Update header title
+                    document.querySelector('.terminal-title').textContent = `${user}@${hostname}:${currentPath}`;
+                    break;
+                case 'cat':
+                    if (args.length === 0) {
+                        printLine("cat: missing file operand", 'err-text');
+                    } else {
+                        const targetFile = args[0];
+                        if (node.contents && node.contents[targetFile]) {
+                            if (node.contents[targetFile].type === "file") {
+                                printLine(node.contents[targetFile].content);
+                            } else {
+                                printLine(`cat: ${targetFile}: Is a directory`, 'err-text');
+                            }
+                        } else {
+                            printLine(`cat: ${targetFile}: No such file or directory`, 'err-text');
+                        }
+                    }
+                    break;
+                case 'sudo':
+                    printLine(`[sudo] password for ${user}:`, 'err-text');
+                    setTimeout(() => printLine(`guest is not in the sudoers file. This incident will be reported.`, 'err-text'), 1000);
+                    break;
+                default:
+                    printLine(`bash: ${cmd}: command not found`, 'err-text');
+            }
+        }
+    </script>
+</body>
+</html>
