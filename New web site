@@ -164,7 +164,7 @@
             max-width: 500px;
             margin-bottom: 2rem;
         }
-        
+
         .hero-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -273,6 +273,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2.5rem;
+            margin-bottom: 5rem;
         }
 
         .achievement-card {
@@ -339,59 +340,6 @@
             transform: scale(1.05);
         }
 
-        /* --- INTERACTIVE TERMINAL CONTACT --- */
-        .interactive-section {
-            margin-top: 6rem;
-            padding-top: 4rem;
-            border-top: 1px dashed var(--border-color);
-            position: relative;
-        }
-
-        .prompt-line {
-            display: flex;
-            align-items: center;
-            color: var(--primary-glow);
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .prompt-line::before {
-            content: "guest@tusharyadav:~$ ";
-            color: var(--text-muted);
-            margin-right: 15px;
-            font-weight: 600;
-        }
-
-        #cmd-input {
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            font-size: 1.2rem;
-            outline: none;
-            flex: 1;
-            font-family: 'Fira Code', 'Courier New', Courier, monospace;
-            border-bottom: 2px solid transparent;
-            transition: border-bottom 0.3s ease;
-        }
-
-        #cmd-input:focus {
-            border-bottom: 2px solid var(--primary-glow);
-        }
-
-        #terminal-output {
-            margin-top: 2rem;
-            color: var(--text-muted);
-            white-space: pre-wrap;
-            font-family: 'Fira Code', monospace;
-            font-size: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .sys-msg { color: var(--text-muted); font-size: 0.9rem; font-family: 'Fira Code', monospace;}
-        .error-msg { color: #ff3333; font-weight: bold;}
-        .success-msg { color: var(--primary-glow); font-weight: bold;}
-        .info-msg { color: #00d2ff; }
-
         /* --- ANIMATIONS --- */
         @keyframes float {
             0% { transform: translateY(0px); }
@@ -415,11 +363,14 @@
         }
 
         .reveal {
-            transition: opacity 0.8s ease-out;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
         }
 
         .reveal.active {
             opacity: 1;
+            transform: translateY(0);
         }
 
     </style>
@@ -434,7 +385,6 @@
         <a href="#home" class="active">Home</a>
         <a href="#about">Stack</a>
         <a href="#achievements">Achievements</a>
-        <a href="#contact">Contact Shell</a>
     </nav>
 
     <div class="container" id="home">
@@ -458,8 +408,10 @@
 
                 <div class="hero-buttons">
                     <a href="https://in.linkedin.com/in/tushar-yadav-54273b327" target="_blank" class="btn">LinkedIn</a>
-                    <a href="https://github.com/Hakkaalpha" target="_blank" class="btn" style="border-color: #8a2be2;">GitHub Shell</a>
-                    <a href="mailto:nirmaly022@gmail.com" class="btn" style="border-color: #4b0082;">Email Me</a>
+                    <a href="https://github.com/Hakkaalpha" target="_blank" class="btn" style="border-color: #8a2be2;">GitHub</a>
+                    <a href="mailto:nirmaly022@gmail.com" class="btn" style="border-color: #4b0082;">Email</a>
+                    <a href="https://www.instagram.com/tusharwithnoreligion1729/" target="_blank" class="btn" style="border-color: #e1306c;">Personal IG</a>
+                    <a href="https://www.instagram.com/theterminal_science" target="_blank" class="btn" style="border-color: #e1306c;">Science IG</a>
                 </div>
             </div>
 
@@ -518,94 +470,29 @@
                 <div class="achievement-card">
                     <h3>⛓️ Private Blockchain Sim</h3>
                     <p>Experimenting with Python and C++ to build and simulate private blockchain structures, exploring decentralized network technology.</p>
-                    <a href="https://github.com/Hakkaalpha/Learning-new-thinks-" target="_blank" class="btn">View Logic Shell →</a>
+                    <a href="https://github.com/Hakkaalpha/Learning-new-thinks-" target="_blank" class="btn">View Logic Repo →</a>
                 </div>
 
-            </div>
-        </section>
-
-        <section id="contact" class="reveal interactive-section">
-            <h2 class="section-title">Contact Shell</h2>
-            <p class="sys-msg">Interactive contact shell enabled. Type 'help' to see available commands.</p>
-            
-            <div id="terminal-output"></div>
-            
-            <div class="prompt-line">
-                <input type="text" id="cmd-input" autocomplete="off" spellcheck="false" placeholder="Type a command...">
             </div>
         </section>
     </div>
 
     <script>
-        // --- 1. Scroll Reveal Logic ---
+        // --- Scroll Reveal Logic ---
         function revealOnScroll() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150; 
+                var elementVisible = 100; 
                 
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
-                } else {
-                    reveals[i].classList.remove("active"); 
                 }
             }
         }
         window.addEventListener("scroll", revealOnScroll);
-        revealOnScroll();
-
-
-        // --- 2. Interactive Terminal Contact Logic ---
-        const inputField = document.getElementById('cmd-input');
-        const outputArea = document.getElementById('terminal-output');
-
-        const helpText = "Available commands:\n" +
-                          "  contact\n" +
-                          "  email\n" +
-                          "  linkedin\n" +
-                          "  github\n" +
-                          "  clear\n" +
-                          "  about\n" +
-                          "  sudo rm -rf /";
-
-        inputField.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const cmd = inputField.value.trim().toLowerCase();
-                let response = '';
-
-                if (cmd === 'help') {
-                    response = helpText;
-                } else if (cmd === 'contact') {
-                    response = "Email: <a href='mailto:nirmaly022@gmail.com' class='info-msg'>nirmaly022@gmail.com</a>\n" +
-                               "LinkedIn: <a href='https://in.linkedin.com/in/tushar-yadav-54273b327' target='_blank' class='info-msg'>in.linkedin.com/in/tushar-yadav-54273b327</a>\n" +
-                               "GitHub: <a href='https://github.com/Hakkaalpha' target='_blank' class='info-msg'>github.com/Hakkaalpha</a>\n";
-                } else if (cmd === 'email') {
-                    response = "<a href='mailto:nirmaly022@gmail.com' class='success-msg'>[LINK] Opening mail client to reach nirmaly022@gmail.com...</a>";
-                } else if (cmd === 'linkedin') {
-                    response = "<a href='https://in.linkedin.com/in/tushar-yadav-54273b327' target='_blank' class='success-msg'>[LINK] Executing LinkedIn connection...</a>";
-                } else if (cmd === 'github') {
-                    response = "<a href='https://github.com/Hakkaalpha' target='_blank' class='success-msg'>[LINK] Executing GitHub shell...</a>";
-                } else if (cmd === 'clear') {
-                    outputArea.innerHTML = '';
-                    inputField.value = '';
-                    return; 
-                } else if (cmd === 'about') {
-                    response = "Tushar Yadav: Aspiring Game Dev. operating on custom Linux kernels.";
-                } else if (cmd === 'sudo rm -rf /') {
-                    response = "<span class='error-msg'>[CRITICAL ERROR] Access Denied. Sudo permissions required. Don't break the web.</span>";
-                } else if (cmd !== '') {
-                    response = "<span class='error-msg'>[ERROR] Command '" + cmd + "' not found. Type 'help' for a command list.</span>";
-                }
-
-                if (cmd !== '') {
-                    outputArea.innerHTML += "<div><span style='color: var(--text-muted); font-weight: bold;'>guest@tusharyadav:~$</span> " + cmd + "</div>";
-                    outputArea.innerHTML += "<div style='margin-bottom: 15px;'>" + response + "</div>";
-                }
-                
-                inputField.value = '';
-            }
-        });
+        revealOnScroll(); // Trigger once on load
     </script>
 
 </body>
